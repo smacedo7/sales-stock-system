@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+.venv/
+
+# Environment variables
+.env
+
+# Test cache
+.pytest_cache/
+
+# Type checker
+.mypy_cache/
+
+# macOS
+.DS_Store
