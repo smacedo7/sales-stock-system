@@ -1,5 +1,6 @@
 from models.product import Product
 from models.inventory_item import InventoryItem
+from models.inventory import Inventory
 
 def main():
 
@@ -10,7 +11,8 @@ def main():
     print(cibolitos.quantity)
     cibolitos.decrease(7)
     print(cibolitos.quantity)
-
+    birosca = Inventory()
+    birosca.increase_stock()
 
 if __name__ == "__main__":
     main()
