@@ -2,6 +2,7 @@ from models.product import Product
 from models.inventory_item import InventoryItem
 from models.inventory import Inventory
 
+
 def main():
 
     cibola = Product('maca', 'fruta vermleha', 2.99)
