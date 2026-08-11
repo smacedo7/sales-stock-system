@@ -7,7 +7,7 @@ class Customer:
                             [a-zA-Z0-9._-]+
                             @
                             [a-zA-Z0-9._-]+
-                            (\.[a-zA-Z]{2, 4})
+                            (\.[a-zA-Z]{2,4})
                             )''', re.VERBOSE)
 
     def __init__(
@@ -19,11 +19,13 @@ class Customer:
             balance: int | float = 0,
     ) -> None:
         
+        self._validate_balance(balance)
+
         self.name = name
         self.address = address
         self.cpf = cpf
         self.email = email
-        self.balance = balance
+        self._balance = balance
 
         self._id = type(self)._next_id
         type(self)._next_id += 1
@@ -34,9 +36,9 @@ class Customer:
             field_name: str
     ) -> None:
         if not isinstance(value, str):
-            raise TypeError(f'{field_name} must be a string')
+            raise TypeError(f'{field_name} must be a string.')
         if not value.strip():
-            raise ValueError(f"{field_name} cannot be empty") 
+            raise ValueError(f"{field_name} cannot be empty.") 
 
     def _validate_email(
             self,
@@ -51,16 +53,17 @@ class Customer:
             cpf: str
     ) -> None:
         if not isinstance(cpf, str):
-            raise TypeError('CPF must to be a string')
-        if len(cpf.strip()) != 11 or cpf.isdigit():
-            raise ValueError('CPF is invalid')
+            raise TypeError('CPF must be a string.')
+        if len(cpf.strip()) != 11 or not cpf.isdigit():
+            raise ValueError('CPF is invalid.')
 
     def _validate_balance(
             self,
-            balance: int | float
+            balance: float
     ) -> None:
         if not isinstance(balance, (int, float)) or isinstance(balance, bool):
             raise TypeError('Balance must be an integer or float.')
+
         if balance < 0:
             raise ValueError('Balance must be greater than or equal to zero.')
 
@@ -109,8 +112,30 @@ class Customer:
     @property
     def balance(self):
         return self._balance
-    
-    @balance.setter
-    def balance(self, balance):
-        self._validate_balance(balance)
-        self._balance = balance
+
+    def deposit(
+            self,
+            value: int | float
+    ) -> None:
+        if not isinstance(value, (int, float)) or isinstance(value, bool):
+            raise TypeError('Deposit must be an integer or float.')
+
+        if value <= 0:
+            raise ValueError('Deposit must be greater than zero.')
+
+        self._balance += value
+
+    def charge(
+            self,
+            value: int | float
+    ) -> None:
+        if not isinstance(value, (int, float)) or isinstance(value, bool):
+            raise TypeError('Charge must be an integer or float.')
+
+        if value <= 0:
+            raise ValueError('Charge must be greater than zero.')
+
+        if value > self._balance:
+            raise ValueError('Insufficient balance.')
+
+        self._balance -= value
