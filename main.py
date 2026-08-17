@@ -6,6 +6,7 @@ from models.customer import Customer
 import re
 
 
+
 def main():
 
     cliente1 = Customer(
