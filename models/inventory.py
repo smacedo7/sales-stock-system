@@ -1,5 +1,6 @@
-from models.product import Product
 from models.inventory_item import InventoryItem
+from models.product import Product
+
 
 class Inventory:
     def __init__(self):
