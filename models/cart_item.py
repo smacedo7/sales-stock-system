@@ -1,7 +1,7 @@
 from models.product import Product
 
 
-class CarItem:
+class CartItem:
     def __init__(
             self,
             product: Product,
