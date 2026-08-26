@@ -22,7 +22,7 @@ class CartItem:
             raise TypeError('Quantity must be an integer.')
 
         if quantity < 0:
-            raise ValueError('Quantity must be greater than or equal to zero. ')
+            raise ValueError('Quantity must be greater than zero. ')
 
     def increase(self, quantity) -> None:
         if not isinstance(quantity, int) or isinstance(quantity, bool):
@@ -40,6 +40,16 @@ class CartItem:
         if self._quantity < quantity:
             raise ValueError('Insufficient stock.')
 
+        self._quantity -= quantity
+
     @property
     def subtotal(self) -> float:
-        return self._product * self._quantity
+        return self._product.price * self._quantity
+
+    @property
+    def product(self) -> Product:
+        return self._product
+
+    @property
+    def quantity(self) -> int:
+        return self._quantity

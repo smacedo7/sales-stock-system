@@ -29,3 +29,7 @@ class Inventory:
     def decrease_stock(self, product, quantity):
         item = self._get_item(product)
         item.decrease(quantity)
+
+    def get_quantity(self, product: Product) -> int:
+        item = self._get_item(product)
+        return item.quantity
