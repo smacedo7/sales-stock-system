@@ -84,5 +84,9 @@ class ShoppingCart:
         return sum(number.subtotal for number in self._items.values())
 
     @property
-    def items(self):
+    def items(self) -> dict[int, CartItem]:
         return self._items.copy()
+
+    @property
+    def customer(self) -> Customer:
+        return self._customer

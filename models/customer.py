@@ -115,7 +115,7 @@ class Customer:
 
     def deposit(
             self,
-            value: int | float
+            value: float
     ) -> None:
         if not isinstance(value, (int, float)) or isinstance(value, bool):
             raise TypeError('Deposit must be an integer or float.')
@@ -127,7 +127,7 @@ class Customer:
 
     def charge(
             self,
-            value: int | float
+            value: float
     ) -> None:
         if not isinstance(value, (int, float)) or isinstance(value, bool):
             raise TypeError('Charge must be an integer or float.')
