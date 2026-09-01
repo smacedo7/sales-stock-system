@@ -16,7 +16,7 @@ class Customer:
             cpf: str,
             address: str,
             email: str,
-            balance: int | float = 0,
+            balance: float = 0,
     ) -> None:
         
         self._validate_balance(balance)
