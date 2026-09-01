@@ -1,31 +1,54 @@
-from models.product import Product
-from models.inventory_item import InventoryItem
-from models.inventory import Inventory
-from models.customer import Customer
 
-import re
+from models.customer import Customer
+from models.inventory import Inventory
+from models.product import Product
+from models.shopping_cart import ShoppingCart
+from services.checkout import CheckoutService
 
 
 def main():
 
-    cliente1 = Customer(
-        'Samuel Macedo',
-        '05852806145',
-        'Rua das Figueiras, Cond. Ilha de Patmos, Cs 01',
-        'samucamaiscedo@gmail.com',
-        50
+    product1 = Product(
+        name='Martelo',
+        description='Ferramenta para construção',
+        price=27.99
     )
 
-    print(cliente1.id)
-    print(cliente1.name)
-    print(cliente1.balance)
-    print(cliente1.address)
-    print(cliente1.cpf)
-    print(cliente1.email)
-    cliente1.deposit(100)
-    print(cliente1.balance)
-    cliente1.charge(77)
-    print(cliente1.balance)
+    inventory1 = Inventory()
+    inventory1.add_product(
+        product=product1,
+        initial_quantity=0
+    )
+    inventory1.increase_stock(
+        product=product1,
+        quantity=10
+    )
+
+    customer1 = Customer(
+        name="Samuel Macedo Correia",
+        cpf="12345678912",
+        address="Wall Street, Baxter building",
+        email="richlittledev@gmail.com",
+        balance=500
+    )
+
+    cart1 = ShoppingCart(customer=customer1)
+    cart1.add_product(product=product1)
+
+    print("Stock before:", inventory1.get_quantity(product=product1))
+    print("Balance before:", customer1.balance)
+    print("Cart total:", cart1.total)
+
+    sale = CheckoutService.checkout(
+        cart=cart1,
+        inventory=inventory1
+    )
+
+    print("Sale total:", sale.total)
+    print("Balance after:", customer1.balance)
+    print("Stock after:", inventory1.get_quantity(product=product1))
+    print("Cart after:", cart1.items)
+
 
 
 if __name__ == "__main__":
