@@ -12,7 +12,7 @@ class InventoryItem:
     @property
     def quantity(self):
         return self._quantity
-    
+
     @property
     def product(self):
         return self._product
@@ -20,11 +20,11 @@ class InventoryItem:
     def _validate_product(self, product):
         if not isinstance(product, Product):
             raise TypeError('Product must be a Product instance. ')
-    
+
     def _validate_quantity(self, quantity):
         if not isinstance(quantity, int) or isinstance(quantity, bool):
             raise TypeError('Quantity must be an integer.')
-        
+
         if quantity < 0:
             raise ValueError('Quantity must be greater than or equal to zero. ')
 

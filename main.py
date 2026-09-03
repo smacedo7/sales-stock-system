@@ -49,6 +49,21 @@ def main():
     print("Stock after:", inventory1.get_quantity(product=product1))
     print("Cart after:", cart1.items)
 
+    product1 = Product(
+        name="Martelo",
+        price=27.99,
+        description="Ferramenta para construção",
+    )
+
+    data = product1.to_dict()
+
+    product2 = Product.from_dict(data)
+
+    print(data)
+    print(product2.id)
+    print(product2.name)
+    print(product2.price)
+    print(product2.description)
 
 
 if __name__ == "__main__":
